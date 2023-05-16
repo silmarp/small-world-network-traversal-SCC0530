@@ -8,10 +8,6 @@
   flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-
-        devPkgs = with pkgs; [
-          nodePackages.pyright
-        ];
       in
       {
         devShell = pkgs.mkShell {
@@ -19,7 +15,6 @@
             pkgs.python310
             pkgs.python310Packages.pip
             pkgs.python310Packages.virtualenv
-            devPkgs
           ];
           /*
           shellHook = ''
