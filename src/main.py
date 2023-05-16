@@ -1,3 +1,5 @@
+import graphs
+
 def main():
     print("Hello from template")
 
