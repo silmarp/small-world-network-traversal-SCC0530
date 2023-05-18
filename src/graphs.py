@@ -32,4 +32,27 @@ class Graph:
         else:
             self._g_dict[origin].append((destination, weight))
 
+    # Return [] if there's no path or [pathVertexes]
+    def depth_first_search(self, origin, destination):
+        visited = set()
+        res = self.__recur_depth_first_search(origin, destination, visited)
+        if res:
+            return res
+        else:
+            return []
 
+
+    def __recur_depth_first_search(self, current, destination, visited):
+        visited.add(current)
+
+        if destination == current:
+            return [destination]
+
+        for neightbor, _ in self._g_dict[current]:
+            stack = []
+            if neightbor not in visited:
+                stack = self.__recur_depth_first_search(neightbor, destination, visited)
+    
+            if stack is not None:
+                stack.insert(0, current)
+                return stack
