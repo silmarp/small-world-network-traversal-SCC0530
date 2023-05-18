@@ -24,5 +24,9 @@ def main():
     print(res)
     """
 
+    res = g.breadth_first_search("a", "c")
+    print(res)
+ 
+
 if __name__ == "__main__":
     main()

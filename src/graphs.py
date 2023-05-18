@@ -35,9 +35,9 @@ class Graph:
     # Return [] if there's no path or [pathVertexes]
     def depth_first_search(self, origin, destination):
         visited = set()
-        res = self.__recur_depth_first_search(origin, destination, visited)
-        if res:
-            return res
+        path = self.__recur_depth_first_search(origin, destination, visited)
+        if path:
+            return path
         else:
             return []
 
@@ -48,11 +48,34 @@ class Graph:
         if destination == current:
             return [destination]
 
-        for neightbor, _ in self._g_dict[current]:
+        for neighbor, _ in self._g_dict[current]:
             stack = []
-            if neightbor not in visited:
-                stack = self.__recur_depth_first_search(neightbor, destination, visited)
+            if neighbor not in visited:
+                stack = self.__recur_depth_first_search(neighbor, destination, visited)
     
             if stack is not None:
                 stack.insert(0, current)
                 return stack
+
+    def breadth_first_search(self, origin, destination):
+        visited = set()
+        path = self.__recur_breadth_first_search(origin, destination, visited, [])
+        if path:
+            return path
+        else:
+            return []
+
+    def __recur_breadth_first_search(self, current, destination, visited, queue):
+        visited.add(current)
+
+        if current == destination:
+            return [current]
+
+        for neighbor, _ in self._g_dict[current]:
+            if neighbor not in visited:
+                queue.append(neighbor)
+
+        path = self.__recur_breadth_first_search(queue[0], destination, visited, queue[1::])
+        if path is not None:
+            path.insert(0, current)
+            return path
