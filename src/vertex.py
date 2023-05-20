@@ -1,5 +1,5 @@
 class Vertex:
-    def __init__(self,x,y, label = '') -> None:
+    def __init__(self, x, y,  label = '') -> None:
         self._label = label
         self._x = x
         self._y = y
@@ -23,13 +23,17 @@ class Vertex:
     def get_label(self):
         return self._label
     
-    def dist(self,vertex):
+    def dist(self, vertex):
         from math import dist
-        return dist([self.get_x(),self.get_y()],[vertex.get_x(),vertex.get_y()])
+        return dist([self.get_x(), self.get_y()], [vertex.get_x(), vertex.get_y()])
     
     def __str__(self):
-        return (self._label)
-    
-    def __repr__(self):
-        return(self._label+": "+str(self._neighbors))
+        repr_v = ""
+        if self.get_label() != '':
+            repr_v = self.get_label() + " " +"{:.2f}".format(self.get_x()) + " " + "{:.2f}".format(self.get_y()) + ":"
+        else:
+            repr_v = str(self.get_x()) + " " + str(self.get_y()) + ": "
+        for i in self.get_neighbors(): 
+            repr_v = repr_v +" ("+i[0].get_label() + ", " + "{:.2f}".format(i[1]) + ")"
+        return repr_v
     
