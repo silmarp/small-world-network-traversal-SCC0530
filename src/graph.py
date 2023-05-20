@@ -13,6 +13,11 @@ class Graph:
     
     def depth_first_search(self, origin, destination):
         visited = set()
+        for vertex in self._vertexes:
+            if origin == vertex._label:
+                origin = vertex
+            elif destination == vertex._label:
+                destination = vertex
         path = self.__recur_depth_first_search(origin, destination, visited)
         if path:
             return path
@@ -24,19 +29,43 @@ class Graph:
         visited.add(current)
 
         if destination == current:
-            return [destination]
+            return [destination._label]
 
-        neighbors = []
-        for vertex in self._vertexes:
-            if vertex._label == current:
-                neighbors = vertex._neighbors
-            
-        for neighbor in neighbors:
+        for neighbor in current._neighbors:
             stack = []
             if neighbor not in visited:
-                stack = self.__recur_depth_first_search(neighbor[0]._label, destination, visited)
+                stack = self.__recur_depth_first_search(neighbor[0], destination, visited)
     
             if stack is not None:
-                stack.insert(0, current)
+                stack.insert(0, current._label)
                 return stack
+
+    def breadth_first_search(self, origin, destination):
+        visited = set()
+        for vertex in self._vertexes:
+            if origin == vertex._label:
+                origin = vertex
+            elif destination == vertex._label:
+                destination = vertex
+
+        path = self.__recur_breadth_first_search(origin, destination, visited, [])
+        if path:
+            return path
+        else:
+            return []
+
+    def __recur_breadth_first_search(self, current, destination, visited, queue):
+        visited.add(current)
+
+        if current == destination:
+            return [current._label]
+
+        for neighbor in current._neighbors:
+            if neighbor not in visited:
+                queue.append(neighbor[0])
+
+        path = self.__recur_breadth_first_search(queue[0], destination, visited, queue[1::])
+        if path is not None:
+            path.insert(0, current._label)
+            return path
 
