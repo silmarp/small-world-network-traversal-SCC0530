@@ -11,6 +11,14 @@ class Vertex:
         if bidirectional:
             n_vertex.add_edge(self,weight)
     
+    def remove_edge(self, vertex, bidirectional = False):
+        for i in range(len(self.get_neighbors())):
+            if self._neighbors[i][0] == vertex:
+                self._neighbors.remove(self._neighbors[i])
+                if bidirectional:
+                    vertex.remove_edge(self)
+                    
+    
     def get_neighbors(self):
         return self._neighbors
     
