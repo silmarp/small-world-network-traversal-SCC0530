@@ -11,7 +11,6 @@ def main():
     vertices = knn.generate_edges(vertices,2)
     for i in vertices:
         print(i)
-    
  
 
 if __name__ == "__main__":
