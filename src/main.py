@@ -1,13 +1,17 @@
 import graph
-import vertex
+import vertex as v
+import knn_generator as knn
 
 def main():
     gr = graph.Graph()
-    a = vertex.Vertex(1,1,'a')
-    b = vertex.Vertex(2,2,'b')
-    a.add_neighbor(b)
-    gr.add_vertex(a)
-    gr.add_vertex(b)
+    vertices = knn.generate_vertices(5)
+    for i in vertices:
+        print(i)
+    
+    vertices = knn.generate_edges(vertices,2)
+    for i in vertices:
+        print(i)
+    
  
 
 if __name__ == "__main__":
