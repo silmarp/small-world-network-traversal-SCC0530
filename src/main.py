@@ -5,8 +5,8 @@ def main():
         "a": [("b",1), ("c", 1)],
         "b": [("d",1), ("e",1)],
         "c": [("f",1),("g",1),],
-        "d": [("h",1), ("i", 1)],
-        "e": [("j",1), ("k", 1)],
+        "d": [("h",1), ("i", 1), ("j",1),],
+        "e": [("j",5), ("k", 1)],
         "f": [("l",1), ("m", 1)],
         "g": [("n",1), ("o", 1)],
         "h": [],
@@ -24,8 +24,13 @@ def main():
     print(res)
     """
 
+    """
     res = g.breadth_first_search("a", "c")
     print(res)
+    """
+    res = g.best_first_search("a", "j")
+    print(res)
+ 
  
 
 if __name__ == "__main__":

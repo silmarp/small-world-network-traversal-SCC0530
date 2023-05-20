@@ -79,3 +79,28 @@ class Graph:
         if path is not None:
             path.insert(0, current)
             return path
+
+    def best_first_search(self, origin, destination):
+        from queue import PriorityQueue
+
+        pq = PriorityQueue()
+        pq.put((0, origin))
+
+        visited = set()
+        visited.add(origin)
+        
+        path = []
+
+        while not pq.empty():
+            current = pq.get()[1]
+            
+            path.append(current)
+            if current is destination:
+                break
+            for vertex, weight in self._g_dict[current]:
+                if vertex not in visited:
+                    visited.add(vertex)
+                    pq.put((weight, vertex))
+        return path
+
+    def a_star_search(self, origin, destination):
