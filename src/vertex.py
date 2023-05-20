@@ -9,7 +9,7 @@ class Vertex:
         if self not in n_vertex.get_neighbors():
             self._neighbors.append((n_vertex, weight))
         if bidirectional:
-            n_vertex.add_edge(self)
+            n_vertex.add_edge(self,weight)
     
     def get_neighbors(self):
         return self._neighbors

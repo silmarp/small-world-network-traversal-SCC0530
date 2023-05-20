@@ -33,5 +33,5 @@ def generate_edges(vertices, k):
                                 d = max(d,dist[i][1])
                         max_d = max(d,d_u)
         for u in dist:
-            v.add_edge(u[0],u[1])
+            v.add_edge(u[0],u[1],True)
     return vertices      
