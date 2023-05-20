@@ -8,6 +8,6 @@ class Graph:
         if vertex not in self._vertexes:
             self._vertexes.append(vertex)
     
-    def add_edge(vertex_a,vertex_b, bidirectional= False):
+    def add_edge(self, vertex_a,vertex_b, bidirectional= False):
         vertex_a.add_neighbor(vertex_b, bidirectional)
         
