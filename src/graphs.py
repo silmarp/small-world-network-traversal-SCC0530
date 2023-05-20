@@ -102,5 +102,3 @@ class Graph:
                     visited.add(vertex)
                     pq.put((weight, vertex))
         return path
-
-    def a_star_search(self, origin, destination):
