@@ -6,21 +6,31 @@ class Vertex:
         self._neighbors = []
     
     def add_edge(self, n_vertex, weight = 0, bidirectional = False):
-        if self not in n_vertex.get_neighbors():
+        if n_vertex not in self.get_neighbors_vertices():
             self._neighbors.append((n_vertex, weight))
         if bidirectional:
             n_vertex.add_edge(self,weight)
     
     def remove_edge(self, vertex, bidirectional = False):
+        vertex_to_remove = []
         for i in range(len(self.get_neighbors())):
             if self._neighbors[i][0] == vertex:
                 self._neighbors.remove(self._neighbors[i])
                 if bidirectional:
                     vertex.remove_edge(self)
+                break
                     
     
     def get_neighbors(self):
         return self._neighbors
+
+    def get_neighbors_vertices(self):
+        vertices = []
+        
+        for v in self.get_neighbors():
+            vertices.append(v[0])
+        
+        return vertices
     
     def get_x(self):
         return self._x
