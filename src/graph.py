@@ -100,3 +100,35 @@ class Graph:
                     visited.add(neighbor)
                     pq.put((neighbor[1], count, neighbor[0]))
         return path
+
+    def a_star_search(self, origin, destination):
+        from queue import PriorityQueue
+
+        for vertex in self._vertexes:
+            if origin == vertex._label:
+                origin = vertex
+            elif destination == vertex._label:
+                destination = vertex
+
+        # Tiebreaker value in case of equal weight
+        count = 0
+        pq = PriorityQueue()
+        pq.put((0, count, origin))
+
+        visited = set()
+        visited.add(origin)
+        
+        path = []
+
+        while not pq.empty():
+            current = pq.get()[2]
+            
+            path.append(current._label)
+            if current is destination:
+                break
+            for neighbor in current._neighbors:
+                count += 1
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    pq.put((neighbor[1]+neighbor[0].dist(destination), count, neighbor[0]))
+        return path
