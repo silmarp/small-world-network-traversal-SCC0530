@@ -6,11 +6,9 @@ import knn_generator as knn
 def visualize_graph(vertices, edges, path=None):
     dot = graphviz.Graph(engine='circo')
     for vertex in vertices:
-        print(vertex._label)
         dot.node(vertex._label, vertex._label, pos=f'{vertex._x},{vertex._y}!', color="blue")
     if path != None: 
         path = [vertex + path[index+1] for index, vertex in enumerate(path) if index < len(path)-1]
-        print(path)
         pairs = []
         for edge in edges:
             for neighbor, _ in edge._neighbors:
