@@ -3,9 +3,17 @@ import vertex as v
 import knn_generator as knn
 import small_world_gen as swg
 import visualize
+import random
+import signal
+import time
 
 def main():
-    experiment_1()
+    experiment_2_10()
+    print("\n")
+    experiment_2_07()
+    print("\n")
+    experiment_2_01()
+    print("\n")
     """
     gr = graph.Graph()
     vertices = swg.generate_vertices(500)
@@ -60,14 +68,199 @@ def experiment_1():
     dist = gr.get_distance(astarfs_path)
     print(f"Method: A Star\nDistance:{dist}\nPath:\n{astarfs_path}")
 
-def experiment_2():
-    # generate small world graphs for each configuration
+def experiment_2_10():
     #(n=2000, k=7, p=10%)
-    #(n=2000, k=7, p=7%)
-    #(n=2000, k=7, p=1%)
+    print(f"Network Parameters: n=2000, k=7, p=10%")
+    gr = graph.Graph()
+    vertices = swg.generate_vertices(2000)
+    gr._vertexes = vertices
+    edges = swg.generate_edges(vertices, 7, 0.10)
 
-    # apply all search algs and report medium distance, and time of each alg
-    return
+    for v in edges:
+        gr.add_vertex(v)
+    
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.breadth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Breadt_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.depth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Depth_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.best_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Best First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.a_star_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: A Star\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+
+def experiment_2_07():
+    #(n=2000, k=7, p=7%)
+    print(f"Network Parameters: n=2000, k=7, p=7%")
+    gr = graph.Graph()
+    vertices = swg.generate_vertices(2000)
+    gr._vertexes = vertices
+    edges = swg.generate_edges(vertices, 7, 0.07)
+
+    for v in edges:
+        gr.add_vertex(v)
+    
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.breadth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Breadt_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.depth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Depth_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.best_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Best First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.a_star_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: A Star\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+
+
+
+
+def experiment_2_01():
+    #(n=2000, k=7, p=1%)
+    print(f"Network Parameters: n=2000, k=7, p=1%")
+    gr = graph.Graph()
+    vertices = swg.generate_vertices(2000)
+    gr._vertexes = vertices
+    edges = swg.generate_edges(vertices, 7, 0.01)
+
+    for v in edges:
+        gr.add_vertex(v)
+    
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.breadth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Breadt_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.depth_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Depth_First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.best_first_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: Best First\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.a_star_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: A Star\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
 
 def experiment_3():
     #use experiment 2 networks to compare dijkstra with A* algoritm

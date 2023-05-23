@@ -92,11 +92,34 @@ class Graph:
             elif str(destination) == vertex._label:
                 destination = vertex
 
+
+        queue = []
+        visited = []
+
+        queue.append(origin)
+
+
+        while queue:
+            vertex = queue.pop()
+            visited.append(vertex._label)
+            if visited is destination:
+                break
+
+            for neighbor in vertex._neighbors:
+                if neighbor[0]._label not in visited:
+                    queue.append(neighbor[0])
+
+        return visited
+
+
+
+        """
         path = self.__recur_breadth_first_search(origin, destination, visited, [])
         if path:
             return path
         else:
             return []
+        """
 
     def __recur_breadth_first_search(self, current, destination, visited, queue):
         visited.append(current._label)
