@@ -11,6 +11,10 @@ class Graph:
     def add_edge(self, vertex_a,vertex_b, bidirectional= False):
         vertex_a.add_neighbor(vertex_b, bidirectional)
     
+    def add_vertices(self, vertices):
+        for v in vertices:
+            self.add_vertex(v)
+    
     def depth_first_search(self, origin, destination):
         visited = set()
         for vertex in self._vertexes:
