@@ -212,7 +212,7 @@ class Graph:
         for vertex in self._vertexes:
             if str(origin) == vertex._label:
                 origin = vertex
-        
+
         unvisited_nodes = list([i for i in self._vertexes])
         
         shortest_path = {}
@@ -222,7 +222,7 @@ class Graph:
         
         for node in unvisited_nodes:
             shortest_path[node] = max_value
-        shortest_path[origin]
+        shortest_path[origin] = 0
         
         while unvisited_nodes:
             current_min_node = None
@@ -231,32 +231,37 @@ class Graph:
                     current_min_node = node
                 elif shortest_path[node] < shortest_path[current_min_node]:
                     current_min_node = node
-
             neighbors = current_min_node._neighbors
             for neighbor in neighbors:
-                new_dist = shortest_path[current_min_node]+ current_min_node[neighbor]
-                if new_dist < shortest_path[neighbor]:
-                    shortest_path[neighbor] = new_dist
-                    previous_node[neighbor] = current_min_node
+                new_dist = shortest_path[current_min_node]+ neighbor[1]
+                if new_dist < shortest_path[neighbor[0]]:
+                    shortest_path[neighbor[0]] = new_dist
+                    previous_node[neighbor[0]] = current_min_node
             
-            unvisited_nodes.remove[current_min_node]
+            unvisited_nodes.remove(current_min_node)
         
         return previous_node, shortest_path
 	
-def print_result(previous_nodes, shortest_path, start_node, target_node):
-    path = []
-    node = target_node
+    def print_result(self, previous_nodes, shortest_path, origin, destination):
+        for vertex in self._vertexes:
+                if str(origin) == vertex._label:
+                    origin = vertex
+                elif str(destination) == vertex._label:
+                    destination = vertex
+
+        path = []
+        node = destination
+        
+        while node != origin:
+            path.append(node._label)
+            node = previous_nodes[node]
     
-    while node != start_node:
-        path.append(node)
-        node = previous_nodes[node]
- 
-    # Add the start node manually
-    path.append(start_node)
-    print("We found the following best path with a value of {}.".format(shortest_path[target_node]))
-    print(" -> ".join(reversed(path)))
+        # Add the start node manually
+        path.append(origin._label)
+        print("We found the following best path with a value of {}.".format(shortest_path[destination]))
+        print(" -> ".join(reversed(path)))
+                        
                     
                 
-            
 
-        
+            
