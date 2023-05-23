@@ -9,10 +9,9 @@ def generate_edges(vertices, k, p, seed = None):
     if seed is not None:
        random.seed(seed)
     
-    vtr = []
-    vta = []
-    
     for v in vertices:
+        vtr = []
+        vta = []
         for n in v.get_neighbors():
             pp = random.random()
             if p>pp:
