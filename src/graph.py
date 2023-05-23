@@ -18,9 +18,9 @@ class Graph:
     def depth_first_search(self, origin, destination):
         visited = set()
         for vertex in self._vertexes:
-            if origin == vertex._label:
+            if str(origin) == vertex._label:
                 origin = vertex
-            elif destination == vertex._label:
+            elif str(destination) == vertex._label:
                 destination = vertex
         path = self.__recur_depth_first_search(origin, destination, visited)
         if path:
@@ -52,9 +52,9 @@ class Graph:
     def breadth_first_search(self, origin, destination):
         visited = set()
         for vertex in self._vertexes:
-            if origin == vertex._label:
+            if str(origin) == vertex._label:
                 origin = vertex
-            elif destination == vertex._label:
+            elif str(destination) == vertex._label:
                 destination = vertex
 
         path = self.__recur_breadth_first_search(origin, destination, visited, [])
@@ -87,9 +87,9 @@ class Graph:
         from queue import PriorityQueue
 
         for vertex in self._vertexes:
-            if origin == vertex._label:
+            if str(origin) == vertex._label:
                 origin = vertex
-            elif destination == vertex._label:
+            elif str(destination) == vertex._label:
                 destination = vertex
 
         # Tiebreaker value in case of equal weight
