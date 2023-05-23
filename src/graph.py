@@ -16,22 +16,41 @@ class Graph:
             self.add_vertex(v)
     
     def depth_first_search(self, origin, destination):
-        visited = set()
         for vertex in self._vertexes:
             if str(origin) == vertex._label:
                 origin = vertex
             elif str(destination) == vertex._label:
                 destination = vertex
+
+        visited = []
+        stack = []
+
+        stack.append(origin)
+        while stack:
+            vertex = stack.pop()
+            if vertex._label not in visited:
+                visited.append(vertex._label)
+            elif vertex._label in visited:
+                continue
+            if vertex._label == destination:
+                break
+
+            for neighbor in vertex._neighbors:
+                stack.append(neighbor[0])
+
+        return visited
+        
+    """
         path = self.__recur_depth_first_search(origin, destination, visited)
         if path:
             return path
         else:
             return []
-
+"""
 
     def __recur_depth_first_search(self, current, destination, visited):
-        #visited.add(current)
-        visited.add(current._label)
+        #visited.append(current)
+        visited.append(current._label)
 
         if destination == current:
             return visited
@@ -50,7 +69,7 @@ class Graph:
                 """
 
     def breadth_first_search(self, origin, destination):
-        visited = set()
+        visited = []
         for vertex in self._vertexes:
             if str(origin) == vertex._label:
                 origin = vertex
@@ -64,8 +83,8 @@ class Graph:
             return []
 
     def __recur_breadth_first_search(self, current, destination, visited, queue):
-        visited.add(current._label)
-        #visited.add(current)
+        visited.append(current._label)
+        #visited.append(current)
 
         if current == destination:
             return visited
@@ -97,8 +116,8 @@ class Graph:
         pq = PriorityQueue()
         pq.put((0, count, origin))
 
-        visited = set()
-        visited.add(origin._label)
+        visited = []
+        visited.append(origin._label)
         
         path = []
 
@@ -111,7 +130,7 @@ class Graph:
             for neighbor in current._neighbors:
                 count += 1
                 if neighbor[0]._label not in visited:
-                    visited.add(neighbor[0]._label)
+                    visited.append(neighbor[0]._label)
                     pq.put((neighbor[1], count, neighbor[0]))
         #return path
         return visited
