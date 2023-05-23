@@ -1,0 +1,17 @@
+contourpy==1.0.7
+cycler==0.11.0
+distlib @ file:///build/distlib-0.3.6/dist/distlib-0.3.6-py2.py3-none-any.whl
+filelock @ file:///build/filelock-3.9.0/dist/filelock-3.9.0-py3-none-any.whl
+fonttools==4.39.3
+graphviz==0.20.1
+kiwisolver==1.4.4
+matplotlib==3.7.1
+networkx==3.1
+numpy==1.24.3
+packaging==23.1
+Pillow==9.5.0
+platformdirs @ file:///build/source/dist/platformdirs-3.0.0-py3-none-any.whl
+pyparsing==3.0.9
+python-dateutil==2.8.2
+six==1.16.0
+virtualenv @ file:///build/virtualenv-20.19.0/dist/virtualenv-20.19.0-py3-none-any.whl
