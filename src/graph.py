@@ -44,9 +44,9 @@ class Graph:
         stack.append(origin)
         while stack:
             vertex = stack.pop()
-            path.append(vertex._label)
             if vertex._label not in visited:
                 visited.append(vertex._label)
+                path.append(vertex._label)
             elif vertex._label in visited:
                 continue
             if vertex._label == destination:
@@ -102,7 +102,8 @@ class Graph:
 
         while queue:
             vertex = queue.pop()
-            visited.append(vertex._label)
+            if vertex._label not in visited:
+                visited.append(vertex._label)
             if visited is destination:
                 break
 
