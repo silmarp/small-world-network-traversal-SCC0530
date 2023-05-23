@@ -110,8 +110,8 @@ class Graph:
                 break
             for neighbor in current._neighbors:
                 count += 1
-                if neighbor._label not in visited:
-                    visited.add(neighbor._label)
+                if neighbor[0]._label not in visited:
+                    visited.add(neighbor[0]._label)
                     pq.put((neighbor[1], count, neighbor[0]))
         #return path
         return visited
