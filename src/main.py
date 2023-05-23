@@ -8,12 +8,20 @@ import signal
 import time
 
 def main():
+    experiment_3(2000,7,10)
+    print('\n')
+    experiment_3(2000,7,5)
+    print('\n')
+    experiment_3(2000,7,1)
+    print('\n')
+    """
     experiment_2_10()
     print("\n")
     experiment_2_07()
     print("\n")
     experiment_2_01()
     print("\n")
+    """
     """
     gr = graph.Graph()
     vertices = swg.generate_vertices(500)
@@ -262,8 +270,41 @@ def experiment_2_01():
 
     print(f" Method: A Star\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
 
-def experiment_3():
-    #use experiment 2 networks to compare dijkstra with A* algoritm
+def experiment_3(n,k,p):
+    print(f"Network Parameters: n="+ str(n)+", k="+str(k)+", p="+str(p)+"%")
+    gr = graph.Graph()
+    vertices = swg.generate_vertices(n)
+    gr._vertexes = vertices
+    edges = swg.generate_edges(vertices, k, p/100)
+    
+    for v in edges:
+        gr.add_vertex(v)
+        
+    distance = 0
+    final_time = 0
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        path = gr.a_star_search(origin, destination)
+        distance += gr.get_distance(path)
+        final_time += time.time() - start_time
+
+    print(f" Method: A Star\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
+    distance = 0
+    final_time = 0
+    
+    for i in range(9):
+        origin = random.randint(0, 1999)
+        destination = random.randint(0, 1999)
+        
+        start_time = time.time()
+        previous_node, shortest_path = gr.dijkstra(origin)
+        distance += gr.dijkstra_dist(shortest_path, origin, destination)
+        final_time += time.time() - start_time
+
+    print(f" Method: Dijkstra\nMedium distance:{distance/10}\nMedium time: {final_time/10}")
     return
     
 

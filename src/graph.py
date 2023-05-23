@@ -243,7 +243,7 @@ class Graph:
         
         return previous_node, shortest_path
 	
-    def print_result(self, previous_nodes, shortest_path, origin, destination):
+    def print_result(self, previous_node, shortest_path, origin, destination):
         for vertex in self._vertexes:
                 if str(origin) == vertex._label:
                     origin = vertex
@@ -255,14 +255,22 @@ class Graph:
         
         while node != origin:
             path.append(node._label)
-            node = previous_nodes[node]
+            node = previous_node[node]
     
         # Add the start node manually
         path.append(origin._label)
         print("We found the following best path with a value of {}.".format(shortest_path[destination]))
         print(" -> ".join(reversed(path)))
                         
-                    
+    def dijkstra_dist(self, shortest_path, origin, destination):
+        for vertex in self._vertexes:
+                if str(origin) == vertex._label:
+                    origin = vertex
+                elif str(destination) == vertex._label:
+                    destination = vertex
+        
+        return shortest_path[destination]
+        
                 
 
             
