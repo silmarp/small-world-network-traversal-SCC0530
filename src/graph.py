@@ -1,3 +1,4 @@
+import sys
 import vertex
 import math
 class Graph:
@@ -182,3 +183,57 @@ class Graph:
                     visited.add(neighbor)
                     pq.put((neighbor[1]+neighbor[0].dist(destination), count, neighbor[0]))
         return path
+    
+    
+    def dijkstra(self, origin):
+        for vertex in self._vertexes:
+            if str(origin) == vertex._label:
+                origin = vertex
+        
+        unvisited_nodes = list([i for i in self._vertexes])
+        
+        shortest_path = {}
+        previous_node = {}
+        max_value = sys.maxsize
+        
+        
+        for node in unvisited_nodes:
+            shortest_path[node] = max_value
+        shortest_path[origin]
+        
+        while unvisited_nodes:
+            current_min_node = None
+            for node in unvisited_nodes:
+                if current_min_node == None:
+                    current_min_node = node
+                elif shortest_path[node] < shortest_path[current_min_node]:
+                    current_min_node = node
+
+            neighbors = current_min_node._neighbors
+            for neighbor in neighbors:
+                new_dist = shortest_path[current_min_node]+ current_min_node[neighbor]
+                if new_dist < shortest_path[neighbor]:
+                    shortest_path[neighbor] = new_dist
+                    previous_node[neighbor] = current_min_node
+            
+            unvisited_nodes.remove[current_min_node]
+        
+        return previous_node, shortest_path
+	
+def print_result(previous_nodes, shortest_path, start_node, target_node):
+    path = []
+    node = target_node
+    
+    while node != start_node:
+        path.append(node)
+        node = previous_nodes[node]
+ 
+    # Add the start node manually
+    path.append(start_node)
+    print("We found the following best path with a value of {}.".format(shortest_path[target_node]))
+    print(" -> ".join(reversed(path)))
+                    
+                
+            
+
+        
