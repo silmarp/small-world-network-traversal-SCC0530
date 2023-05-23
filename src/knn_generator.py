@@ -2,15 +2,19 @@ import graph as g
 import vertex as v
 import random
 
-def generate_vertices(n):
-        vertices = []
-        for i in range(n):
-            x = random.random()*n
-            y = random.random()*n
-            vertices.append(v.Vertex(x,y,str(i)),)
-        return vertices
+def generate_vertices(n, seed = None):
+    if seed is not None:
+       random.seed(seed)
+    vertices = []
+    
+    for i in range(n):
+        x = random.random()*n
+        y = random.random()*n
+        vertices.append(v.Vertex(x,y,str(i)),)
+    return vertices
     
 def generate_edges(vertices, k):
+       
     for v in vertices:
         dist = []
         max_d = 0
