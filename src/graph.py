@@ -1,4 +1,5 @@
 import vertex
+import math
 class Graph:
     def __init__(self) -> None:
         self._vertexes = []
@@ -14,7 +15,20 @@ class Graph:
     def add_vertices(self, vertices):
         for v in vertices:
             self.add_vertex(v)
-    
+
+    def get_distance(self, path):
+        vertexes = []
+        for index, p in enumerate(path):
+            for vertex in self._vertexes:
+                if p == vertex._label:
+                    vertexes.append(vertex)
+
+        distance = 0
+        for index, vertex in enumerate(vertexes):
+            if index < len(path)-1:
+                distance += math.dist([vertex._x, vertex._y], [vertexes[index+1]._x, vertexes[index+1]._y])
+        return distance
+
     def depth_first_search(self, origin, destination):
         for vertex in self._vertexes:
             if str(origin) == vertex._label:
@@ -24,10 +38,12 @@ class Graph:
 
         visited = []
         stack = []
+        path = []
 
         stack.append(origin)
         while stack:
             vertex = stack.pop()
+            path.append(vertex._label)
             if vertex._label not in visited:
                 visited.append(vertex._label)
             elif vertex._label in visited:
@@ -38,7 +54,7 @@ class Graph:
             for neighbor in vertex._neighbors:
                 stack.append(neighbor[0])
 
-        return visited
+        return path
         
     """
         path = self.__recur_depth_first_search(origin, destination, visited)
@@ -134,3 +150,35 @@ class Graph:
                     pq.put((neighbor[1], count, neighbor[0]))
         #return path
         return visited
+
+    def a_star_search(self, origin, destination):
+        from queue import PriorityQueue
+
+        for vertex in self._vertexes:
+            if str(origin) == vertex._label:
+                origin = vertex
+            elif str(destination) == vertex._label:
+                destination = vertex
+
+        # Tiebreaker value in case of equal weight
+        count = 0
+        pq = PriorityQueue()
+        pq.put((0, count, origin))
+
+        visited = set()
+        visited.add(origin)
+
+        path = []
+
+        while not pq.empty():
+            current = pq.get()[2]
+
+            path.append(current._label)
+            if current is destination:
+                break
+            for neighbor in current._neighbors:
+                count += 1
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    pq.put((neighbor[1]+neighbor[0].dist(destination), count, neighbor[0]))
+        return path
