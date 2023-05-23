@@ -21,8 +21,8 @@ def generate_edges(vertices, k, p, seed = None):
                 while new_n == v:
                     new_n = vertices[random.randint(0,len(vertices)-1)]
                 vta.append(new_n)
-    for i in range(len(vtr)):
-        v.remove_edge(vtr[i][0], bidirectional = True)
-        v.add_edge(vta[i],v.dist(vta[i]), bidirectional = True)
+        for i in range(len(vtr)):
+            v.remove_edge(vtr[i][0], bidirectional = True)
+            v.add_edge(vta[i],v.dist(vta[i]), bidirectional = True)
 
     return vertices
